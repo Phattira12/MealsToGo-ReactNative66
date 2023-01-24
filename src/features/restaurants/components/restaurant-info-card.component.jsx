@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native-paper";
+import { Text, View, Image } from "react-native";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
 import { SvgXml } from "react-native-svg";
@@ -27,7 +27,7 @@ const Address = styled(Text)`
 `;
 
 const Info = styled.View`
-  padding: ${(props) => props.theme.space[3]};
+  padding: ${(props) => props.theme.space[2]};
 `;
 
 const Rating = styled.View`
@@ -49,7 +49,7 @@ const SectionEnd = styled.View`
 export const RestaurantInfoCard = ({ ...restaurant }) => {
   const {
     name = "Tumyum",
-    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging71.png",
+    icon = "https://cdn-icons-png.flaticon.com/512/2895/2895396.png",
     photos = ["https://img.kapook.com/u/2017/sarinee/July/week3/cok2.jpg"],
     address = "100 some random street",
     isOpenNow = true,
@@ -64,6 +64,7 @@ export const RestaurantInfoCard = ({ ...restaurant }) => {
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Title>{name}</Title>
+        <Address>{address}</Address>
         <Section>
           <Rating>
             {ratingArray.map((_, index) => (
@@ -82,7 +83,6 @@ export const RestaurantInfoCard = ({ ...restaurant }) => {
             <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
           </SectionEnd>
         </Section>
-        <Address>{address}</Address>
       </Info>
     </RestaurantCard>
   );
