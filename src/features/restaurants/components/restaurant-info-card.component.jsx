@@ -15,7 +15,7 @@ import {
   Address,
 } from "./restaurant-info-card.styles";
 
-export const RestaurantInfoCard = ({ ...restaurant }) => {
+export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Tumyum",
     icon = "https://cdn-icons-png.flaticon.com/512/2895/2895396.png",
@@ -24,6 +24,7 @@ export const RestaurantInfoCard = ({ ...restaurant }) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = true,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -36,8 +37,13 @@ export const RestaurantInfoCard = ({ ...restaurant }) => {
         <Address>{address}</Address>
         <Section>
           <Rating>
-            {ratingArray.map((_, index) => (
-              <SvgXml key={index} xml={star} width={20} height={20} />
+            {ratingArray.map((_, i) => (
+              <SvgXml
+                key={`star-${placeId}-${i}`}
+                xml={star}
+                width={20}
+                height={20}
+              />
             ))}
           </Rating>
           <SectionEnd>

@@ -1,10 +1,13 @@
 import { View, FlatList } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from "styled-components/native";
 import { Spacer } from "../../../components/spacer/spacer";
 import { SafeArea } from "../../../components/utility/safe-area.component";
+import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
+import { ActivityIndicator, MD2Colors } from "react-native-paper";
+import { Search } from "../components/search.component.jsx";
 
 const SearchContainer = styled(View)`
   padding: ${(props) => props.theme.space[3]};
@@ -12,48 +15,47 @@ const SearchContainer = styled(View)`
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
-  padding: 16,
+    padding: 16,
   },
-  })``;
+})``;
+
+const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
+
+const LoadingContainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
 
 export const RestaurantsScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const onChangeSearch = (query) => setSearchQuery(query);
 
+  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+  console.log(error);
+
   return (
     <SafeArea>
-      <SearchContainer>
-      <Searchbar
-          placeholder="Search"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-        />
-      </SearchContainer>
-        <RestaurantList
-          data={[
-            { name: 1 },
-            { name: 2 },
-            { name: 3 },
-            { name: 4 },
-            { name: 5 },
-            { name: 6 },
-            { name: 7 },
-            { name: 8 },
-            { name: 9 },
-            { name: 10 },
-            { name: 11 },
-            { name: 12 },
-            { name: 13 },
-            { name: 14 },
-          ]}
-          renderItem={() => (
+      {isLoading && (
+        <LoadingContainer>
+          <Loading size={50} animating={true} color={MD2Colors.purple900} />
+        </LoadingContainer>
+      )}
+      <Search />
+      <RestaurantList
+        data={restaurants}
+        renderItem={({ item }) => {
+          return (
             <Spacer position="bottom" size="large">
-              <RestaurantInfoCard />
+              <RestaurantInfoCard restaurant={item} />
             </Spacer>
-          )}
-          keyExtractor={(item) => item.name}
-          contentContainerStyle={{ padding: 16 }}
-        />
+          );
+        }}
+        keyExtractor={(item) => item.name}
+        contentContainerStyle={{ padding: 16 }}
+      />
     </SafeArea>
   );
 };
