@@ -28,7 +28,7 @@ export const RestaurantsContextProvider = ({ children }) => {
     }, 2000);
   };
 
-  useEffect(() => {
+  useEffect(() => {     //ค้นเป็นชื่อแต่แปลงเป็นพิกัดลองติจูด/ละติจูดเพื่อค้นหาตำแหน่ง**
     if (location) {
       const locationString = `${location.lat},${location.lng}`;
       retrieveRestaurants(locationString);
