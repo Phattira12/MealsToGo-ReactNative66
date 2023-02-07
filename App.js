@@ -9,9 +9,9 @@ import {
 import { useFonts as useItim, Itim_400Regular } from "@expo-google-fonts/itim";
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import { AppNavigator } from "./src/infrastructure/navigation/app.navigator";
-
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 
 export default function App() {
   let [chewyLoaded] = useChewy({
@@ -29,11 +29,13 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantsContextProvider>
-            <AppNavigator/>
-          </RestaurantsContextProvider>
-        </LocationContextProvider>
+        <FavouritesContextProvider>
+          <LocationContextProvider>
+            <RestaurantsContextProvider>
+              <AppNavigator />
+            </RestaurantsContextProvider>
+          </LocationContextProvider>
+        </FavouritesContextProvider>
         <ExpoStatusBar style="auto" />
       </ThemeProvider>
     </>

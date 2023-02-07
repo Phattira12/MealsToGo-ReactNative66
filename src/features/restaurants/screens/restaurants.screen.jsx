@@ -1,5 +1,5 @@
-import { View, FlatList, TouchableOpacity } from "react-native";
-import React, { useState, useContext } from "react";
+import { FlatList, TouchableOpacity } from "react-native";
+import React, { useContext } from "react";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import styled from "styled-components/native";
 import { Spacer } from "../../../components/spacer/spacer";
@@ -8,9 +8,9 @@ import { RestaurantsContext } from "../../../services/restaurants/restaurants.co
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
 import { Search } from "../components/search.component.jsx";
 
-const SearchContainer = styled(View)`
-  padding: ${(props) => props.theme.space[3]};
-`;
+// const SearchContainer = styled(View)`
+//   padding: ${(props) => props.theme.space[3]};
+// `;
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -29,8 +29,8 @@ const LoadingContainer = styled.View`
 `;
 
 export const RestaurantsScreen = ({ navigation }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const onChangeSearch = (query) => setSearchQuery(query);
+  // const [searchQuery, setSearchQuery] = useState("");
+  // const onChangeSearch = (query) => setSearchQuery(query);
 
   const { isLoading, error, restaurants } = useContext(RestaurantsContext);
   console.log(error);
