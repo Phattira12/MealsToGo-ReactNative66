@@ -10,6 +10,7 @@ export const RestaurantDetailScreen = ({ route }) => {
   const [lunchExpanded, setLunchExpanded] = useState(false);
   const [dinnerExpanded, setDinnerExpanded] = useState(false);
   const [drinksExpanded, setDrinksExpanded] = useState(false);
+  
   return (
     <SafeArea>
       <RestaurantInfoCard restaurant={restaurant} />
