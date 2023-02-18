@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
@@ -7,11 +7,9 @@ import {
   Chewy_400Regular,
 } from "@expo-google-fonts/chewy";
 import { useFonts as useItim, Itim_400Regular } from "@expo-google-fonts/itim";
-import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
-import { LocationContextProvider } from "./src/services/location/location.context";
 import "react-native-gesture-handler";
-import { AppNavigator } from "./src/infrastructure/navigation/app.navigator";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import { Navigation } from "./src/infrastructure/navigation";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 
 export default function App() {
   let [chewyLoaded] = useChewy({
@@ -29,15 +27,33 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <AppNavigator />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
-        <ExpoStatusBar style="auto" />
+        <AuthenticationContextProvider>
+          <Navigation />
+        </AuthenticationContextProvider>
       </ThemeProvider>
+      <ExpoStatusBar style="auto" />
     </>
   );
 }
+
+// service เชื่อมต่อภายนอก/databest
+// context แชร์ข้อมูลจาก service มาใช้
+// navigation กำหนดเส้นทาง
+// screen แสดงผล
+
+// useEffect(() => {
+//   setTimeout(() => {
+//     firebase.auth
+//       .signInWithEmailAndPassword(
+//         firebase.getAuth,
+//         "film@gmail.com",
+//         "film12"
+//       )
+//       .then((user) => {
+//         setIsAuthenticated(true);
+//       })
+//       .catch(() => {
+//         setIsAuthenticated(false);
+//       });
+//   }, 2000);
+// }, []);

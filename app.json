@@ -12,17 +12,19 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/854439ca-ed65-45c2-a29d-cff3404839ce"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.phattira16.MealsToGo"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.phattira16.MealsToGo"
@@ -34,6 +36,9 @@
       "eas": {
         "projectId": "854439ca-ed65-45c2-a29d-cff3404839ce"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"  
     }
   }
 }
